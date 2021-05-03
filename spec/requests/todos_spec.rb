@@ -34,6 +34,13 @@ RSpec.describe "Todos", type: :request do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
+
+      context 'when the record doesn\'t exist' do
+        before { get "/todos/#{-1}" }
+        it 'returns status code 404' do
+          expect(response).to have_http_status(404)
+        end
+      end
     end
 
     context 'when the record does not exist' do
